@@ -1,0 +1,30 @@
+{% extends 'maintenances/base.html' %}
+{% block content %}
+
+{% if user.is_authenticated %}
+
+<h1> {{equipment}} </h1>
+
+<div class="card">
+    <h5 class="card-header">Update Equipment's Data</h5>
+    <div class="card-body">
+        <form action="" method=POST>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <br/>
+            <input type="submit" value="Update"
+            class="btn btn-secondary">
+        </form>
+
+    </div>
+  </div>
+  <br/>
+  <br/>
+
+{% else %}
+
+<h1> Sorry! You must be logged in to view this page... </h1>
+
+{% endif %}
+
+{% endblock %}

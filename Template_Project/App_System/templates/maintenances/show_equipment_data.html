@@ -1,0 +1,25 @@
+{% extends 'maintenances/base.html' %}
+{% block content %}
+
+{% if user.is_authenticated %}
+
+<h1> {{equipment}} </h1>
+
+<div class="card">
+    <h5 class="card-header">Equipment's Data</h5>
+    <div class="card-body">
+        <p class="card-text"> <strong>Tag:</strong>      {{ equipment.tag }} </p>
+        <p class="card-text"> <strong>Location:</strong> {{ equipment.address }} </p>
+        <p class="card-text"> <strong>Type:</strong>     {{ equipment.type }} </p>
+    </div>
+  </div>
+  <br/>
+  <br/>
+
+{% else %}
+
+<h1> Sorry! You must be logged in to view this page... </h1>
+
+{% endif %}
+
+{% endblock %}

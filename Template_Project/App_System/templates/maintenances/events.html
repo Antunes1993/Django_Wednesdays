@@ -1,0 +1,33 @@
+{% extends 'maintenances/base.html' %}
+{% block content %}
+
+{% if user.is_authenticated %}
+
+<h1> Maintenances </h1>
+
+{% for maintenance in maintenance_list %}
+<div class="card">
+    <h5 class="card-header">{{maintenance}}</h5>
+    <div class="card-body">
+        <p class="card-text"> <strong>Date:</strong>        {{ maintenance.maintenance_date }} </p>
+        <p class="card-text"> <strong>Equipment:</strong>       {{ maintenance.equipment }} </p>
+        <p class="card-text"> <strong>Manager:</strong>     {{ maintenance.manager }} </p>
+        <p class="card-text"> <strong>Description:</strong> {{ maintenance.description }} </p>
+        <p class="card-text"> <strong>Attendees:</strong> 
+          {% for user in maintenance.attendees.all %}
+          <br/>  {{ user }}  
+          {% endfor %} </p>
+    </div>
+  </div>
+  <br/>
+  <br/>
+{% endfor %}
+
+{% else %}
+
+<h1> Sorry! You must be logged in to view this page... </h1>
+
+{% endif %}
+{% endblock %}
+
+

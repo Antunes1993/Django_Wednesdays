@@ -1,0 +1,79 @@
+{% extends 'maintenances/base.html' %}
+{% block content %}
+
+{% if user.is_authenticated %}
+
+<h1> Equipments </h1>
+
+{% for equipment in equipments %}
+
+<div class="card">
+    <h5 class="card-header"> <a href="{% url 'show_equipment' equipment.id %}" style="text-decoration: none; color:black">{{equipment}} </a></h5>    
+    <div class="card-body">
+        <p class="card-text" > <strong>Tag:</strong>      {{ equipment.tag }} </p>
+        <p class="card-text"> <strong>Location:</strong> {{ equipment.address }} </p>
+        <p class="card-text"> <strong>Type:</strong>     {{ equipment.type }} </p>
+    </div>
+    <div class="card-header">
+      <button class="btn btn-secondary" style="background-color: green;"> <a href="{% url 'update_equipment' equipment.id %}" style="text-decoration: none; color:white;" > Update </a></button>  
+    </div>
+    
+  </div>
+  <br/>
+  <br/>
+{% endfor %}
+
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+ 
+ {% if equipments.has_previous %} 
+ <li class="page-item"><a class="page-link" href="?page=1"> &laquo First </a></li>
+ <li class="page-item"><a class="page-link" href="?page={{ equipments.previous_page_number }}"> Previous </a></li>
+ 
+ {% else %}
+ <li class="page-item disabled"><a class="page-link" > &laquo First </a></li>
+ <li class="page-item disabled"><a class="page-link" > Previous </a></li>
+
+ {% endif %}
+
+
+ <li class="page-item disabled"><a class="page-link" href="#"> Page {{ equipments.number }} of {{ equipments.paginator.num_pages }} </a></li>
+
+
+ {% if equipments.has_next %} 
+ <li class="page-item"><a class="page-link" href="?page={{ equipments.next_page_number }}"> Next </a></li>
+ <li class="page-item"><a class="page-link" href="?page= {{ equipments.paginator.num_pages }}"> Last &raquo</a></li>
+
+ {% else %}
+ <li class="page-item disabled"><a class="page-link" href=""> Next </a></li>
+ <li class="page-item disabled"><a class="page-link" href=""> Last &raquo</a></li>
+
+{% endif %}
+</ul>
+</nav>
+
+
+<!--
+<table class="table table-striped table-hover table-bordered">
+  {% for equipment in equipment_list %}
+  <tr>
+    <td>
+      <a href="{% url 'show_equipment' equipment.id %}"> {{equipment}} </a>
+    </td>
+    <td align="right">
+      <a href="{% url 'update_equipment' equipment.id %}">
+      Update
+      </a>
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+-->
+
+
+{% else %}
+
+<h1> Sorry! You must be logged in to view this page... </h1>
+
+{% endif %}
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'maintenances/base.html' %}
+{% block content %}
+
+<center> <h1> Search Results </h1> </center>
+
+{% if searched %}
+    <h1> You searched for {{ searched }}.</h1>
+    {% for equipment in equipment_list %}
+        <div class="card">
+            <h5 class="card-header"> <a href="{% url 'show_equipment' equipment.id %}">{{equipment}}</a></h5>
+            <div class="card-body">
+                <p class="card-text"> <strong>Tag:</strong>      {{ equipment.tag }} </p>
+                <p class="card-text"> <strong>Location:</strong> {{ equipment.address }} </p>
+                <p class="card-text"> <strong>Type:</strong>     {{ equipment.type }} </p>
+            </div>
+        </div>
+        <br/>
+        <br/>
+    {% endfor %}
+
+{% else %}
+    <h1> You forget to insert your search. </h1>
+{% endif %}
+{% endblock %}
